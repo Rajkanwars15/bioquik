@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sequin-b"
+version = "0.1.0"
+description = "Succinct FM-index motif counter for FASTA files"
+authors = [
+  { name = "Rajkanwar Singh", email = "rajkanwars15@outlook.com" }
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+dependencies = [
+  "pandas>=2.2",
+  "tqdm>=4.66",
+  "pydivsufsort>=0.0.18",
+  "typer[all]>=0.12",
+  "rich>=13.7",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2",
+  "pytest-cov",
+  "ruff",
+  "pre-commit"
+]
+
+[project.scripts]
+sequin-b = "sequin-b.cli:app"
