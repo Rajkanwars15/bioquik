@@ -1,4 +1,4 @@
-"""Top-level package for **sequin**."""
+"""Top-level package for **bioquik**."""
 
 __version__ = "0.1.0"
 

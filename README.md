@@ -1,9 +1,10 @@
-# SEQUIN: SEQUence INspection for Overlapping Motifs
+# bioquik
+an attempt to make biotech faster and easier ;)
 
 ## Local test
 ```shell
 pip install -e '.[dev]'
-sequin --help
+bioquik --help
 ```
 
 ```shell

@@ -1,5 +1,5 @@
 import pytest
-from sequin.fmindex import FMIndex
+from bioquik.fmindex import FMIndex
 
 def test_count_simple():
     fm = FMIndex("GATTACA$")

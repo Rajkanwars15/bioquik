@@ -28,7 +28,7 @@ def process_fasta_file(
     fasta_path: str | os.PathLike,
     pattern_to_motifs: dict[str, list[str]],
     *,
-    out_dir: str | os.PathLike = "sequin_results",
+    out_dir: str | os.PathLike = "bioquik_results",
 ) -> str:
     """Count motifs in *fasta_path* and save CSV → *out_dir*.
 

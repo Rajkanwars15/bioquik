@@ -1,4 +1,4 @@
-# src/sequin/cli.py
+# src/bioquik/cli.py
 from __future__ import annotations
 
 import glob
@@ -18,10 +18,17 @@ from .motifs import build_pattern_to_motifs
 # 1) Create a Typer “group” called app
 # ──────────────────────────────────────────────────────────────────────────────────
 app = typer.Typer(
-    help="Sequin — succinct FM-index motif counter for FASTA files.",
+    help="bioquik — an attempt to make biotech faster and easier ;) ",
     add_help_option=True,
     no_args_is_help=True,
 )
+
+# Root callback so `count` becomes an actual subcommand
+@app.callback(invoke_without_command=True)
+def _root(ctx: typer.Context):
+    if ctx.invoked_subcommand is None:
+        print(ctx.get_help())
+        raise typer.Exit()
 
 
 # ──────────────────────────────────────────────────────────────────────────────────
@@ -40,7 +47,7 @@ def count(
         os.cpu_count(), help="Number of worker processes"
     ),
     out_dir: str = typer.Option(
-        "sequin_results", help="Directory to write CSV results"
+        "bioquik_results", help="Directory to write CSV results"
     ),
 ) -> None:
     """
@@ -77,7 +84,7 @@ def count(
 
 
 # ──────────────────────────────────────────────────────────────────────────────────
-# 3) If someone runs “python -m sequin”, dispatch into the group
+# 3) If someone runs “python -m bioquik”, dispatch into the group
 # ──────────────────────────────────────────────────────────────────────────────────
 def _main() -> None:  # pragma: no cover
     app()

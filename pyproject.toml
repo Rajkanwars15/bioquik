@@ -3,12 +3,16 @@ requires = ["hatchling>=1.24"]
 build-backend = "hatchling.build"
 
 [project]
-name = "sequin-b"
+name = "bioquik"
 version = "0.1.0"
-description = "Succinct FM-index motif counter for FASTA files"
+description = "an attempt to make biotech faster and easier ;)"
 authors = [
   { name = "Rajkanwar Singh", email = "rajkanwars15@outlook.com" }
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bioquik"]
+
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.9"
@@ -29,4 +33,4 @@ dev = [
 ]
 
 [project.scripts]
-sequin-b = "sequin-b.cli:app"
+bioquik = "bioquik.cli:app"
