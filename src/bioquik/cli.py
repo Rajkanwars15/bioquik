@@ -1,94 +1,59 @@
-# src/bioquik/cli.py
 from __future__ import annotations
-
-import glob
 import os
-from concurrent.futures import ProcessPoolExecutor
+import shutil
 from pathlib import Path
 from typing import List
 
 import typer
 from rich import print
-from rich.progress import Progress
 
-from .fasta_worker import process_fasta_file
-from .motifs import build_pattern_to_motifs
+from .validate import validate_patterns, validate_dir
+from .processor import run_count
+from .reports import combine_csv, write_summary
+from .plotter import plot_distribution, plot_heatmap
 
-# ──────────────────────────────────────────────────────────────────────────────────
-# 1) Create a Typer “group” called app
-# ──────────────────────────────────────────────────────────────────────────────────
 app = typer.Typer(
     help="bioquik — an attempt to make biotech faster and easier ;) ",
     add_help_option=True,
     no_args_is_help=True,
 )
 
-# Root callback so `count` becomes an actual subcommand
 @app.callback(invoke_without_command=True)
 def _root(ctx: typer.Context):
     if ctx.invoked_subcommand is None:
         print(ctx.get_help())
         raise typer.Exit()
 
-
-# ──────────────────────────────────────────────────────────────────────────────────
-# 2) Register “count” as a SUB-COMMAND of that group
-# ──────────────────────────────────────────────────────────────────────────────────
-@app.command(help="Count CG-anchored motifs in FASTA files.")
+@app.command(help="Count CG-anchored motifs in FASTA files and generate reports.")
 def count(
-    patterns: str = typer.Option(
-        ...,
-        help="Comma-separated wildcard patterns, e.g. '****CG****,**CG**'",
-    ),
-    seq_dir: str = typer.Option(
-        "seq", help="Directory containing .fasta files"
-    ),
-    workers: int = typer.Option(
-        os.cpu_count(), help="Number of worker processes"
-    ),
-    out_dir: str = typer.Option(
-        "bioquik_results", help="Directory to write CSV results"
-    ),
+    patterns: str = typer.Option(..., help="Comma-separated wildcard patterns (must include 'CG')"),
+    seq_dir: Path = typer.Option(Path("seq"), help="Directory containing .fasta files"),
+    workers: int = typer.Option(os.cpu_count(), help="Number of worker processes"),
+    out_dir: Path = typer.Option(Path("bioquik_results"), help="Directory for results"),
+    json_out: bool = typer.Option(False, help="Also write combined JSON summary"),
+    plot: bool = typer.Option(False, help="Generate distribution & heatmap plots"),
 ) -> None:
-    """
-    Parallel motif counter. Expands each wildcard‐pattern into concrete CG-anchored motifs,
-    then processes all .fasta files under `seq_dir` in parallel and writes CSVs to `out_dir`.
-    """
-    pattern_list: List[str] = [
-        p.strip() for p in patterns.split(",") if p.strip()
-    ]
-    pattern_to_motifs = build_pattern_to_motifs(pattern_list)
+    # 1) Validate inputs
+    pattern_list: List[str] = validate_patterns(patterns)
+    validate_dir(seq_dir, "sequence")
+    # clear any previous results to avoid mixing old CSVs
+    if out_dir.exists():
+        shutil.rmtree(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
 
-    fasta_files = glob.glob(str(Path(seq_dir) / "*.fasta"))
-    if not fasta_files:
-        print(f"[red]No FASTA files found in {seq_dir!s}")
-        raise typer.Exit(code=1)
+    # 2) Process FASTAs in parallel
+    run_count(pattern_list, seq_dir, out_dir, workers)
 
-    with Progress() as progress:
-        task = progress.add_task(
-            "[cyan]Processing FASTA files", total=len(fasta_files)
-        )
-        with ProcessPoolExecutor(max_workers=workers) as executor:
-            futures = [
-                executor.submit(
-                    process_fasta_file, f, pattern_to_motifs, out_dir=out_dir
-                )
-                for f in fasta_files
-            ]
-            for fut in futures:
-                fut.add_done_callback(lambda _: progress.advance(task))
-            for fut in futures:  # propagate exceptions
-                fut.result()
+    # 3) Combine & write reports
+    df_all = combine_csv(out_dir)
+    write_summary(df_all, out_dir, json_out=json_out)
 
-    print(f"[green]Finished. Results in {out_dir}/")
+    # 4) Optionally plot
+    if plot:
+        plot_distribution(df_all, out_dir)
+        plot_heatmap(df_all, out_dir)
 
+    print(f"[green]Finished. Results in {out_dir}")
 
-# ──────────────────────────────────────────────────────────────────────────────────
-# 3) If someone runs “python -m bioquik”, dispatch into the group
-# ──────────────────────────────────────────────────────────────────────────────────
-def _main() -> None:  # pragma: no cover
+if __name__ == "__main__":
     app()
-
-
-if __name__ == "__main__":  # pragma: no cover
-    _main()

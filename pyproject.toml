@@ -22,6 +22,7 @@ dependencies = [
   "pydivsufsort>=0.0.18",
   "typer[all]>=0.12",
   "rich>=13.7",
+  "matplotlib>=3.10.3"
 ]
 
 [project.optional-dependencies]

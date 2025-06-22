@@ -42,7 +42,7 @@ def process_fasta_file(
     tqdm.write(f"  Building FM-index for {fasta_path.name} …")
     fm = FMIndex(seq)
 
-    results = []
+    results: list[dict[str, str | int]] = []
     for pattern_key, motif_list in pattern_to_motifs.items():
         for motif in motif_list:
             c = _count_in_fm(fm, motif.encode(), allow_overlap=False)
@@ -51,6 +51,6 @@ def process_fasta_file(
 
     out_path = Path(out_dir) / f"{fasta_path.stem}_motif_counts.csv"
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    pd.DataFrame(results).to_csv(out_path, index=False)
+    pd.DataFrame(results,columns = ["Pattern", "Motif", "Count"],).to_csv(out_path, index=False)
     tqdm.write(f"→ {fasta_path} → {out_path.name}")
     return str(out_path)
