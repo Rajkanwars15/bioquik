@@ -2,7 +2,6 @@ import json
 import pandas as pd
 from pathlib import Path
 
-import pytest
 
 from bioquik.reports import combine_csv, write_summary
 

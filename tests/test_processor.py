@@ -1,7 +1,6 @@
 import pandas as pd
 from pathlib import Path
 
-import pytest
 
 from bioquik.processor import run_count
 

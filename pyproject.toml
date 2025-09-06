@@ -5,17 +5,16 @@ build-backend = "hatchling.build"
 [project]
 name = "bioquik"
 version = "0.1.0"
-description = "an attempt to make biotech faster and easier ;)"
+description = "bioquik is a fast and extensible command-line toolkit for counting CG-anchored DNA motifs in FASTA files. Designed to accelerate bioinformatics pipelines with a simple and parallel interface."
 authors = [
   { name = "Rajkanwar Singh", email = "rajkanwars15@outlook.com" }
 ]
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/bioquik"]
-
 readme = "README.md"
+readme-content-type = "text/markdown"
 license = { file = "LICENSE" }
 requires-python = ">=3.9"
+keywords = ["bioinformatics", "fast", "kmer", "fm-index"]
 dependencies = [
   "pandas>=2.2",
   "tqdm>=4.66",
@@ -25,12 +24,43 @@ dependencies = [
   "matplotlib>=3.10.3"
 ]
 
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent"
+]
+
+
+[project.urls]
+"Source" = "https://github.com/Rajkanwars15/bioquik"
+"Documentation" = "https://github.com/Rajkanwars15/bioquik#readme"
+"Issue Tracker" = "https://github.com/Rajkanwars15/bioquik/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bioquik"]
+
 [project.optional-dependencies]
 dev = [
   "pytest>=8.2",
   "pytest-cov",
   "ruff",
-  "pre-commit"
+  "pre-commit",
+  "sphinx>=7.0",
+  "myst-parser>=2.0",   # Markdown support
+  "furo>=2024.1.29",    # clean modern theme
+  "sphinx-autodoc-typehints",
+  "sphinx-copybutton",
+]
+docs = [
+  "sphinx>=7.3",
+  "myst-parser>=4.0.1",
+  "sphinx-rtd-theme>=2.0"
 ]
 
 [project.scripts]

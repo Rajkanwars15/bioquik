@@ -1,6 +1,5 @@
 from pathlib import Path
 from typer.testing import CliRunner
-import pytest
 
 import bioquik.cli
 

@@ -351,3 +351,11 @@ dmypy.json
 .pyre/
 .pytype/
 cython_debug/
+
+
+# Docs build artifacts
+/docs/build/
+/docs/source/api/modules.rst
+*.doctrees
+
+.DS_Store

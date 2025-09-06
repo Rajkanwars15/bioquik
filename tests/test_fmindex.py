@@ -1,4 +1,3 @@
-import pytest
 from bioquik.fmindex import FMIndex
 
 def test_count_simple():

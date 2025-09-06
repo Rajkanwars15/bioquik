@@ -8,7 +8,6 @@ import pandas as pd
 from tqdm import tqdm
 
 from .fmindex import FMIndex
-from .motifs import build_pattern_to_motifs
 
 __all__ = ["process_fasta_file"]
 

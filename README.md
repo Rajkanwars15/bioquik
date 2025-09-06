@@ -2,6 +2,19 @@
 
 **bioquik** is a fast and extensible command-line toolkit for counting CG-anchored DNA motifs in FASTA files. Designed to accelerate bioinformatics pipelines with a simple and parallel interface.
 
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Docs](https://img.shields.io/badge/docs-latest-grren?logo=readthedocs)](https://bioquik.readthedocs.io/en/latest/intro.html)
+[![GitHub license](https://img.shields.io/github/license/rajkanwars15/bioquik)](https://github.com/Rajkanwars15/bioquik/blob/main/LICENSE)
+[![Build Status](https://github.com/rajkanwars15/bioquik/actions/workflows/test_with_coverage.yml/badge.svg)](https://github.com/pudeIko/piva/actions/workflows/test_with_coverage.yml)
+[![codecov](https://codecov.io/gh/rajkanwars15/bioquik/branch/main/graph/badge.svg)](https://codecov.io/gh/rajkanwars15/bioquik)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+
+[![PyPI - Version](https://img.shields.io/pypi/v/bioquik?logo=pypi)](https://pypi.org/project/bioquik/)
+[![Python Versions](https://img.shields.io/badge/python-3.9%20|3.10%20|%203.11|%203.12-blue?logo=python)](https://www.python.org/)
+[![Keep a Changelog](https://img.shields.io/badge/Keep%20a%20Changelog-v0.1.0-royalblue?logo=keepachangelog)](changelog.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?logo=contributorcovenant)](code_of_conduct.md)
+
+
 ## Features
 
 - Expand wildcard patterns (e.g. `**CG**`) into exact motifs
@@ -17,43 +30,28 @@
 
 ## Installation
 
-To install the latest version in editable mode with development dependencies:
+For **users** (latest release from PyPI):
 
 ```bash
-pip install -e '.[dev]'
+pip install bioquik
+```
+
+For **developers** (editable mode + dev dependencies):
+
+```bash
+git clone https://github.com/Rajkanwars15/bioquik
+cd bioquik
+pip install -e '.[dev,docs]'
 ````
-
-## CLI Usage
-
-Run the command-line interface:
-
-```bash
-bioquik --help
-```
-
-Example:
-
-```bash
-bioquik count \
-  --patterns '**CG**' \
-  --seq-dir path/to/fasta/files \
-  --out-dir results/ \
-  --json-out \
-  --plot
-```
-
-## Testing
-
-Run tests with:
-
-```bash
-pytest
-```
 
 ## Requirements
 
 * Python ≥ 3.9
 * Linux/macOS (tested); Windows should work with minor path adjustments
+
+## Documentation
+
+Full docs are hosted on [Read the Docs](https://bioquik.readthedocs.io/en/latest/).
 
 ## License
 

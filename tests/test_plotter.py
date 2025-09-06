@@ -1,7 +1,5 @@
 import pandas as pd
-from pathlib import Path
 
-import pytest
 
 from bioquik.plotter import plot_distribution
 
