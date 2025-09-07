@@ -5,7 +5,7 @@
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Docs](https://img.shields.io/badge/docs-latest-grren?logo=readthedocs)](https://bioquik.readthedocs.io/en/latest/intro.html)
 [![GitHub license](https://img.shields.io/github/license/rajkanwars15/bioquik)](https://github.com/Rajkanwars15/bioquik/blob/main/LICENSE)
-[![Build Status](https://github.com/rajkanwars15/bioquik/actions/workflows/test_with_coverage.yml/badge.svg)](https://github.com/pudeIko/piva/actions/workflows/test_with_coverage.yml)
+[![Build Status](https://github.com/rajkanwars15/bioquik/actions/workflows/test_with_coverage.yml/badge.svg)](https://github.com/rajkanwars15/bioquik/actions/workflows/test_with_coverage.yml)
 [![codecov](https://codecov.io/gh/rajkanwars15/bioquik/branch/main/graph/badge.svg)](https://codecov.io/gh/rajkanwars15/bioquik)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
