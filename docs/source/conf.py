@@ -37,3 +37,5 @@ myst_enable_extensions = [
     "deflist",
     "linkify",
 ]
+
+master_doc = "index"
