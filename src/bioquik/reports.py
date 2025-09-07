@@ -4,9 +4,9 @@ import pandas as pd
 
 def combine_csv(out_dir: Path) -> pd.DataFrame:
     """
-    Read all *_motif_counts.csv in out_dir and concatenate.
+    Read all *_motif_counts.csv in out_dir and concatenate in sorted order.
     """
-    csvs = list(out_dir.glob("*_motif_counts.csv"))
+    csvs = sorted(out_dir.glob("*_motif_counts.csv"))
     return pd.concat((pd.read_csv(f) for f in csvs), ignore_index=True)
 
 def write_summary(
