@@ -52,14 +52,14 @@ dev = [
   "ruff",
   "pre-commit",
   "sphinx>=7.0",
-  "myst-parser>=2.0",   # Markdown support
+  "myst-parser[linkify]>=2.0",   # Markdown support
   "furo>=2024.1.29",    # clean modern theme
   "sphinx-autodoc-typehints",
   "sphinx-copybutton",
 ]
 docs = [
   "sphinx>=7.3",
-  "myst-parser>=4.0.1",
+  "myst-parser[linkify]>=4.0.1",
   "sphinx-rtd-theme>=2.0"
 ]
 
