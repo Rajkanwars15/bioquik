@@ -2,6 +2,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 
+
 def plot_distribution(df: pd.DataFrame, out_dir: Path) -> None:
     """
     Bar chart of total counts per motif.
@@ -23,6 +24,7 @@ def plot_distribution(df: pd.DataFrame, out_dir: Path) -> None:
     plt.savefig(out_dir / "motif_distribution.png")
     plt.close()
 
+
 def plot_heatmap(df: pd.DataFrame, out_dir: Path) -> None:
     """
     Heatmap of motif counts by file.
@@ -34,10 +36,10 @@ def plot_heatmap(df: pd.DataFrame, out_dir: Path) -> None:
         return
 
     pivot = df.pivot_table(
-        index = "Motif",
-        columns = lambda r: Path(r.name).stem,
-        values = "Count",
-        fill_value = 0,
+        index="Motif",
+        columns=lambda r: Path(r.name).stem,
+        values="Count",
+        fill_value=0,
     )
 
     plt.figure()

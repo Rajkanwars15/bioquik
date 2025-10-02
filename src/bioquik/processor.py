@@ -6,6 +6,7 @@ from rich.progress import Progress
 from .fasta_worker import process_fasta_file
 from .motifs import build_pattern_to_motifs
 
+
 def run_count(
     pattern_list: List[str],
     seq_dir: Path,

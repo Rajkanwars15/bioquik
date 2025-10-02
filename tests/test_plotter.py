@@ -3,11 +3,14 @@ import pandas as pd
 
 from bioquik.plotter import plot_distribution
 
+
 def test_plot_distribution(tmp_path):
-    df = pd.DataFrame([
-        {"Motif": "AA", "Count": 5},
-        {"Motif": "BB", "Count": 2},
-    ])
+    df = pd.DataFrame(
+        [
+            {"Motif": "AA", "Count": 5},
+            {"Motif": "BB", "Count": 2},
+        ]
+    )
     out = tmp_path / "out"
     out.mkdir()
 

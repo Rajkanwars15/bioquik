@@ -1,4 +1,5 @@
 """Pattern → motif expansion utilities."""
+
 from __future__ import annotations
 
 from itertools import product
@@ -10,6 +11,7 @@ __all__ = ["generate_motifs", "build_pattern_to_motifs"]
 
 _BASES = ("G", "A", "T", "C")
 
+
 def generate_motifs(patterns: list[str]):
     """Expand wildcard * patterns into concrete motifs (deduplicated, sorted)."""
     unique: set[str] = set()
@@ -20,6 +22,7 @@ def generate_motifs(patterns: list[str]):
             for post_seq in product(_BASES, repeat=post_cg):
                 unique.add(f"{''.join(pre_seq)}CG{''.join(post_seq)}")
     return sorted(unique)
+
 
 def build_pattern_to_motifs(patterns: list[str]) -> Dict[str, List[str]]:
     """Return mapping *pattern→[motifs]* using N as wildcard stand-in."""

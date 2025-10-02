@@ -2,12 +2,14 @@ from pathlib import Path
 import json
 import pandas as pd
 
+
 def combine_csv(out_dir: Path) -> pd.DataFrame:
     """
     Read all *_motif_counts.csv in out_dir and concatenate in sorted order.
     """
     csvs = sorted(out_dir.glob("*_motif_counts.csv"))
     return pd.concat((pd.read_csv(f) for f in csvs), ignore_index=True)
+
 
 def write_summary(
     df: pd.DataFrame,
@@ -22,6 +24,4 @@ def write_summary(
 
     if json_out:
         summary = df.groupby("Motif")["Count"].sum().to_dict()
-        (out_dir / "combined_counts.json").write_text(
-            json.dumps(summary, indent=2)
-        )
+        (out_dir / "combined_counts.json").write_text(json.dumps(summary, indent=2))

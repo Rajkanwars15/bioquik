@@ -15,8 +15,8 @@ release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
-    "myst_parser",          # Markdown support
-    "sphinx.ext.autodoc",   # API docs from docstrings
+    "myst_parser",  # Markdown support
+    "sphinx.ext.autodoc",  # API docs from docstrings
     "sphinx.ext.napoleon",  # Google/NumPy style docstrings
     "sphinx.ext.viewcode",  # Add links to source code
     "sphinx_rtd_theme",

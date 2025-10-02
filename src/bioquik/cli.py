@@ -18,15 +18,19 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 
+
 @app.callback(invoke_without_command=True)
 def _root(ctx: typer.Context):
     if ctx.invoked_subcommand is None:
         print(ctx.get_help())
         raise typer.Exit()
 
+
 @app.command(help="Count CG-anchored motifs in FASTA files and generate reports.")
 def count(
-    patterns: str = typer.Option(..., help="Comma-separated wildcard patterns (must include 'CG')"),
+    patterns: str = typer.Option(
+        ..., help="Comma-separated wildcard patterns (must include 'CG')"
+    ),
     seq_dir: Path = typer.Option(Path("seq"), help="Directory containing .fasta files"),
     workers: int = typer.Option(os.cpu_count(), help="Number of worker processes"),
     out_dir: Path = typer.Option(Path("bioquik_results"), help="Directory for results"),
@@ -54,6 +58,7 @@ def count(
         plot_heatmap(df_all, out_dir)
 
     print(f"[green]Finished. Results in {out_dir}")
+
 
 if __name__ == "__main__":
     app()

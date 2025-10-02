@@ -1,5 +1,6 @@
 from bioquik.fmindex import FMIndex
 
+
 def test_count_simple():
     fm = FMIndex("GATTACA$")
     assert fm.count(b"TA") == 1

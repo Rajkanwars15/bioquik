@@ -1,4 +1,5 @@
 """FM-index backed by *pydivsufsort* and *WaveletTree*."""
+
 from __future__ import annotations
 
 from typing import Dict, List
@@ -8,6 +9,7 @@ from pydivsufsort import divsufsort
 from .wavelettree import WaveletTree
 
 __all__ = ["FMIndex"]
+
 
 class FMIndex:
     """Succinct FM-index supporting *count* and *locate* queries."""
@@ -34,9 +36,7 @@ class FMIndex:
         sa = divsufsort(self.seq_b)
 
         # 2) BWT.
-        self.bwt = bytes(
-            self.seq_b[s - 1] if s != 0 else ord("$") for s in sa
-        )
+        self.bwt = bytes(self.seq_b[s - 1] if s != 0 else ord("$") for s in sa)
 
         # 3) C-table.
         self.alphabet = sorted(set(self.bwt))

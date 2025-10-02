@@ -1,9 +1,11 @@
 """Succinct binary-recursive wavelet tree with rank-support."""
+
 from __future__ import annotations
 
 from typing import List
 
 __all__ = ["WaveletTree"]
+
 
 class WaveletTree:
     """Wavelet tree over a *bytes* sequence providing **rank1** queries.
@@ -73,8 +75,16 @@ class WaveletTree:
         self.prefix_ranks.append(total)  # sentinel
 
         # Recurse.
-        self.left = WaveletTree(bytes(left_bytes), left_alpha, sample_rate=sample_rate) if left_alpha else None
-        self.right = WaveletTree(bytes(right_bytes), right_alpha, sample_rate=sample_rate) if right_alpha else None
+        self.left = (
+            WaveletTree(bytes(left_bytes), left_alpha, sample_rate=sample_rate)
+            if left_alpha
+            else None
+        )
+        self.right = (
+            WaveletTree(bytes(right_bytes), right_alpha, sample_rate=sample_rate)
+            if right_alpha
+            else None
+        )
 
     # ------ Public API ------
     def rank(self, symbol: int, i: int) -> int:
