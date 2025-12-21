@@ -30,6 +30,7 @@ language = "en"
 # -- Options for HTML output -------------------------------------------------
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
+html_logo = "../img/logo-docs.png"
 
 # -- MyST configuration ------------------------------------------------------
 myst_enable_extensions = [

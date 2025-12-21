@@ -1,28 +1,27 @@
-# bioquik Documentation
+# Bioquik Documentation
 
-Welcome to **bioquik** docs!
+Welcome to **Bioquik**, a high-performance toolkit for counting DNA sequence motifs across large FASTA datasets.
+
+Bioquik is designed for **batch analysis**. It processes directories of FASTA files in parallel and writes results to disk as CSV, JSON, and optional plots.
 
 ---
 
-## 1. Install
+## Installation
 
 ```shell
 pip install bioquik
 ```
 
-## 2. Quickstart
-### CLI
-```shell
-bioquik --help
-bioquik count --input sequences.fa --k 5 --out counts.csv
-```
-### Python API
-```python
-from bioquik.processor import run_count
-summary = run_count("data/example.fa", motifs=["ATG"])
-```
+---
 
-## 3. Contents
+## Quickstart
+
+See the Quickstart guide for command-line and Python examples.
+
+---
+
+## Contents
+
 ```{toctree}
 :maxdepth: 2
 :caption: Tutorials
@@ -31,6 +30,7 @@ quickstart
 validation
 reports
 ```
+
 ```{toctree}
 :maxdepth: 2
 :caption: API Reference

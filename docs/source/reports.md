@@ -1,20 +1,49 @@
 # Reports
 
-After running analyses, you can combine and summarize results with **bioquik**.
+Bioquik writes all outputs to the specified output directory.
 
-## Combine multiple CSVs
+---
+
+## Per-file motif counts
+
+For each FASTA file processed, Bioquik generates:
+
+```
+<filename>_motif_counts.csv
+```
+
+Each CSV contains motif counts for that file.
+
+---
+
+## Combined reports
 
 ```python
 from bioquik.reports import combine_csv
 
-combined = combine_csv(["counts_1.csv", "counts_2.csv"])
-print(combined.head())
+df = combine_csv(out_dir)
 ```
 
-## Write a summary report
+This reads all `*_motif_counts.csv` files in `out_dir` and concatenates them.
+
+---
+
+## Writing summaries
 
 ```python
 from bioquik.reports import write_summary
 
-write_summary(combined, "summary.csv")
+write_summary(df, out_dir, json_out=True)
 ```
+
+Outputs:
+- `combined_counts.csv` (always)
+- `summary.json` (optional)
+
+---
+
+## Plots
+
+If plotting is enabled, Bioquik produces:
+- A bar chart of total motif counts
+- A heatmap of motif counts by FASTA file

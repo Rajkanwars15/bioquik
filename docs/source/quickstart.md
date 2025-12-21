@@ -1,24 +1,65 @@
 # Quickstart
 
-This tutorial will get you up and running with **bioquik** in just a few minutes.
+This guide gets you up and running with **Bioquik**.
 
-## Count k-mers from FASTA
+---
 
-Suppose you have a FASTA file called `sequences.fa`:
+## Command-line usage
+
+Bioquik operates on a directory of FASTA files.
 
 ```shell
-bioquik count --input sequences.fa --k 5 --out counts.csv
+bioquik count \
+  --patterns ATG,CG* \
+  --seq-dir data/fasta \
+  --out-dir results \
+  --workers 4 \
+  --plot
 ```
 
-This command counts all 5-mers in the file and writes the results to counts.csv.
+### Parameters
 
-## Use from Python
+- `--patterns`: Comma-separated motif patterns (wildcards supported)
+- `--seq-dir`: Directory containing `.fasta` files
+- `--out-dir`: Output directory for reports
+- `--workers`: Number of parallel worker processes
+- `--plot`: Generate plots
+
+---
+
+## Python usage
 
 ```python
+from pathlib import Path
 from bioquik.processor import run_count
 
-summary = run_count("sequences.fa", motifs=["ATG", "TATA"])
-print(summary)
+run_count(
+    pattern_list=["ATG", "CG*"],
+    seq_dir=Path("data/fasta"),
+    out_dir=Path("results"),
+    workers=4,
+)
 ```
 
-The summary is a pandas.DataFrame with counts for the motifs you requested.
+### Notes
+
+- `run_count` processes **all FASTA files** in `seq_dir`
+- Results are written to `out_dir`
+- The function returns `None`
+
+---
+
+## Single-file processing (advanced)
+
+```python
+from bioquik.fasta_worker import process_fasta_file
+from bioquik.motifs import build_pattern_to_motifs
+
+mapping = build_pattern_to_motifs(["ATG"])
+
+csv_path = process_fasta_file(
+    "example.fasta",
+    mapping,
+    out_dir="results"
+)
+```

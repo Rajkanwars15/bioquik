@@ -1,9 +1,11 @@
+![](./docs/img/logo-readme.png)
+
 # bioquik
 
 **bioquik** is a fast and extensible command-line toolkit for counting CG-anchored DNA motifs in FASTA files. Designed to accelerate bioinformatics pipelines with a simple and parallel interface.
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Docs](https://img.shields.io/badge/docs-latest-grren?logo=readthedocs)](https://bioquik.readthedocs.io/en/latest/intro.html)
+[![Docs](https://img.shields.io/badge/docs-latest-grren?logo=readthedocs)](https://bioquik.readthedocs.io/en/latest/)
 [![GitHub license](https://img.shields.io/github/license/rajkanwars15/bioquik)](https://github.com/Rajkanwars15/bioquik/blob/main/LICENSE)
 [![Build Status](https://github.com/rajkanwars15/bioquik/actions/workflows/test_with_coverage.yml/badge.svg)](https://github.com/rajkanwars15/bioquik/actions/workflows/test_with_coverage.yml)
 [![codecov](https://codecov.io/gh/rajkanwars15/bioquik/branch/main/graph/badge.svg)](https://codecov.io/gh/rajkanwars15/bioquik)
