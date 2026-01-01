@@ -18,6 +18,18 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Fixed
 
-## [0.1.0] = 2025-09-07
+## [0.1.1] - 2025-12-??  <!-- replace ?? with appropriate day once known -->
+
+### Added
+- Optional `viz` extra dependency for visualization support
+- Test coverage for heatmap plotting
+
+### Changed
+- Lazy import of matplotlib to prevent forced kernel restart
+
+### Fixed
+- Heatmap plotting now supports both long-form and wide-form inputs without errors
+
+## [0.1.0] - 2025-09-07
 
 First public repo

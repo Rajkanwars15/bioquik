@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bioquik"
-version = "0.1.0"
+version = "0.1.1"
 description = "bioquik is a fast and extensible command-line toolkit for counting CG-anchored DNA motifs in FASTA files. Designed to accelerate bioinformatics pipelines with a simple and parallel interface."
 authors = [
   { name = "Rajkanwar Singh", email = "rajkanwars15@outlook.com" }
@@ -20,8 +20,7 @@ dependencies = [
   "tqdm>=4.66",
   "pydivsufsort>=0.0.18",
   "typer[all]>=0.12",
-  "rich>=13.7",
-  "matplotlib>=3.10.3"
+  "rich>=13.7"
 ]
 
 classifiers = [
@@ -46,6 +45,9 @@ classifiers = [
 packages = ["src/bioquik"]
 
 [project.optional-dependencies]
+viz = [
+  "matplotlib>=3.10.3"
+]
 dev = [
   "pytest>=8.2",
   "pytest-cov",
@@ -56,6 +58,7 @@ dev = [
   "furo>=2024.1.29",    # clean modern theme
   "sphinx-autodoc-typehints",
   "sphinx-copybutton",
+  "bioquik[viz]",
 ]
 docs = [
   "sphinx>=7.3",
