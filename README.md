@@ -11,9 +11,11 @@
 [![codecov](https://codecov.io/gh/rajkanwars15/bioquik/branch/main/graph/badge.svg)](https://codecov.io/gh/rajkanwars15/bioquik)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
+![Publish](https://github.com/Rajkanwars15/bioquik/actions/workflows/publish.yml/badge.svg)
 [![PyPI - Version](https://img.shields.io/pypi/v/bioquik?logo=pypi)](https://pypi.org/project/bioquik/)
+[![TestPyPI](https://img.shields.io/badge/TestPyPI-bioquik-informational)](https://test.pypi.org/project/bioquik/)
 [![Python Versions](https://img.shields.io/badge/python-3.9%20|3.10%20|%203.11|%203.12-blue?logo=python)](https://www.python.org/)
-[![Keep a Changelog](https://img.shields.io/badge/Keep%20a%20Changelog-v0.1.0-royalblue?logo=keepachangelog)](changelog.md)
+[![Keep a Changelog](https://img.shields.io/badge/Keep%20a%20Changelog-v0.1.1-royalblue?logo=keepachangelog)](changelog.md)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?logo=contributorcovenant)](code_of_conduct.md)
 
 
