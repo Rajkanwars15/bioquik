@@ -33,6 +33,13 @@ reports
 
 ```{toctree}
 :maxdepth: 2
+:caption: Architecture
+
+architecture
+```
+
+```{toctree}
+:maxdepth: 2
 :caption: API Reference
 
 api/modules

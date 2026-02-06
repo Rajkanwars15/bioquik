@@ -57,6 +57,17 @@ pip install -e '.[dev,docs]'
 
 Full docs are hosted on [Read the Docs](https://bioquik.readthedocs.io/en/latest/).
 
+### For Users
+- [Quickstart Guide](docs/source/quickstart.md) - Get started quickly
+- [Validation Guide](docs/source/validation.md) - Input validation details
+- [Reports Guide](docs/source/reports.md) - Understanding output formats
+
+### For Developers
+- [Architecture Guide](ARCHITECTURE.md) - System architecture and design decisions
+- [Module Reference](MODULES.md) - Detailed module documentation
+- [Developer Guide](DEVELOPER_GUIDE.md) - Contributing and extending Bioquik
+- [Architecture Details](docs/source/architecture.md) - In-depth technical documentation
+
 ## License
 
 This project is licensed under the terms of the [MIT License](LICENSE).
