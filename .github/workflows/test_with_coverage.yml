@@ -1,28 +1,41 @@
 name: Run tests and upload coverage
 
 on:
-  push
+  push:
+  pull_request:
 
 jobs:
   test:
-    name: Run tests and collect coverage
+    name: Test Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        include:
+          - python-version: "3.13"
+            experimental: true
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         run: pip install -e ".[dev]"
 
       - name: Run tests
         run: pytest --cov --cov-branch --cov-report=xml
+        continue-on-error: ${{ matrix.experimental == true }}
 
       - name: Upload results to Codecov
+        if: matrix.python-version == '3.12'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
