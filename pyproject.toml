@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bioquik"
-version = "0.1.1"
+version = "0.2.0"
 description = "bioquik is a fast and extensible command-line toolkit for counting CG-anchored DNA motifs in FASTA files. Designed to accelerate bioinformatics pipelines with a simple and parallel interface."
 authors = [
   { name = "Rajkanwar Singh", email = "rajkanwars15@outlook.com" }
