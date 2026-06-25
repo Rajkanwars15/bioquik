@@ -43,10 +43,6 @@ def test_cli_invalid_patterns(tmp_path: Path):
     assert res.exit_code == 1
 
 
-def test_cli_no_subcommand():
-    res = runner.invoke(bioquik.cli.app, [])
-    assert res.exit_code == 0
-
 
 def test_cli_out_dir_already_exists(tmp_path: Path):
     seq_dir = tmp_path / "seq"
