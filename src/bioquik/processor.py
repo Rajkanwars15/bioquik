@@ -1,14 +1,16 @@
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
-from typing import List
+
 from rich.progress import Progress
 
 from .fasta_worker import process_fasta_file
 from .motifs import build_pattern_to_motifs
 
+__all__ = ["run_count"]
+
 
 def run_count(
-    pattern_list: List[str],
+    pattern_list: list[str],
     seq_dir: Path,
     out_dir: Path,
     workers: int,

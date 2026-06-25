@@ -31,7 +31,7 @@ bioquik count \
 
 ```python
 from pathlib import Path
-from bioquik.processor import run_count
+from bioquik import run_count
 
 run_count(
     pattern_list=["ATG", "CG*"],
@@ -52,8 +52,7 @@ run_count(
 ## Single-file processing (advanced)
 
 ```python
-from bioquik.fasta_worker import process_fasta_file
-from bioquik.motifs import build_pattern_to_motifs
+from bioquik import process_fasta_file, build_pattern_to_motifs
 
 mapping = build_pattern_to_motifs(["ATG"])
 

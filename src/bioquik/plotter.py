@@ -1,5 +1,8 @@
 from pathlib import Path
+
 import pandas as pd
+
+__all__ = ["plot_distribution", "plot_heatmap"]
 
 
 def plot_distribution(df: pd.DataFrame, out_dir: Path) -> None:
@@ -8,8 +11,8 @@ def plot_distribution(df: pd.DataFrame, out_dir: Path) -> None:
     """
     try:
         import matplotlib.pyplot as plt
-    except ImportError:
-        raise ImportError("Install with `pip install bioquik[viz]` to enable visualization.")
+    except ImportError as exc:
+        raise ImportError("Install with `pip install bioquik[viz]` to enable visualization.") from exc
     # Nothing to plot?  Save an empty figure so downstream scripts/tests succeed.
     if df.empty or df["Count"].sum() == 0:
         plt.figure()
@@ -34,9 +37,10 @@ def plot_heatmap(df: pd.DataFrame, out_dir: Path) -> None:
     """
     try:
         import matplotlib.pyplot as plt
-    except ImportError:
-        raise ImportError("Install with `pip install bioquik[viz]` to enable visualization.")
-    if df.empty or df.to_numpy().sum() == 0:
+    except ImportError as exc:
+        raise ImportError("Install with `pip install bioquik[viz]` to enable visualization.") from exc
+    total = df["Count"].sum() if "Count" in df.columns else df.select_dtypes("number").values.sum()
+    if df.empty or total == 0:
         plt.figure()
         plt.savefig(out_dir / "motif_heatmap.png")
         plt.close()

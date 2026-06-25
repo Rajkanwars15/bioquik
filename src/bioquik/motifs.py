@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from itertools import product
-from typing import Dict, List
 
 from tqdm import tqdm
 
@@ -24,14 +23,14 @@ def generate_motifs(patterns: list[str]):
     return sorted(unique)
 
 
-def build_pattern_to_motifs(patterns: list[str]) -> Dict[str, List[str]]:
+def build_pattern_to_motifs(patterns: list[str]) -> dict[str, list[str]]:
     """Return mapping *pattern→[motifs]* using N as wildcard stand-in."""
-    mapping: Dict[str, List[str]] = {}
+    mapping: dict[str, list[str]] = {}
     for pattern in tqdm(patterns, desc="Building pattern→motifs map"):
         key = pattern.replace("*", "N")
         pre, _, post = pattern.partition("CG")
         pre_cg, post_cg = pre.count("*"), post.count("*")
-        pre_vars = ("".join(p) for p in product(_BASES, repeat=pre_cg))
-        post_vars = ("".join(p) for p in product(_BASES, repeat=post_cg))
-        mapping[key] = [f"{pre}CG{post}" for pre in pre_vars for post in post_vars]
+        pre_vars = ["".join(p) for p in product(_BASES, repeat=pre_cg)]
+        post_vars = ["".join(p) for p in product(_BASES, repeat=post_cg)]
+        mapping[key] = [f"{p}CG{q}" for p in pre_vars for q in post_vars]
     return mapping

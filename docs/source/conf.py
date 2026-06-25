@@ -2,16 +2,19 @@
 
 import os
 import sys
+from importlib.metadata import version as _pkg_version, PackageNotFoundError
 
 # -- Path setup --------------------------------------------------------------
-# Add src directory so autodoc can import bioquik
 sys.path.insert(0, os.path.abspath("../../src"))
 
 # -- Project information -----------------------------------------------------
 project = "bioquik"
 copyright = "2025, Rajkanwar Singh"
 author = "Rajkanwar Singh"
-release = "0.1.1"
+try:
+    release = _pkg_version("bioquik")
+except PackageNotFoundError:
+    release = "unknown"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
