@@ -19,7 +19,16 @@ def test_plot_distribution(tmp_path):
     assert (out / "motif_distribution.png").exists()
 
 
+def test_plot_distribution_empty(tmp_path):
+    df = pd.DataFrame({"Motif": pd.Series(dtype=str), "Count": pd.Series(dtype=int)})
+    out = tmp_path / "out_empty_dist"
+    out.mkdir()
+    plot_distribution(df, out)
+    assert (out / "motif_distribution.png").exists()
+
+
 from bioquik.plotter import plot_heatmap
+
 
 def test_plot_heatmap(tmp_path):
     df = pd.DataFrame(
@@ -32,5 +41,26 @@ def test_plot_heatmap(tmp_path):
     out = tmp_path / "out_heatmap"
     out.mkdir()
 
+    plot_heatmap(df, out)
+    assert (out / "motif_heatmap.png").exists()
+
+
+def test_plot_heatmap_empty(tmp_path):
+    df = pd.DataFrame({"Motif": pd.Series(dtype=str), "Count": pd.Series(dtype=int)})
+    out = tmp_path / "out_empty_heatmap"
+    out.mkdir()
+    plot_heatmap(df, out)
+    assert (out / "motif_heatmap.png").exists()
+
+
+def test_plot_heatmap_longform(tmp_path):
+    df = pd.DataFrame(
+        [
+            {"Motif": "ACG", "Count": 3},
+            {"Motif": "TCG", "Count": 1},
+        ]
+    )
+    out = tmp_path / "out_long"
+    out.mkdir()
     plot_heatmap(df, out)
     assert (out / "motif_heatmap.png").exists()

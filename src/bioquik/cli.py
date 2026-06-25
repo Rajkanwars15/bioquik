@@ -21,7 +21,7 @@ app = typer.Typer(
 
 @app.callback(invoke_without_command=True)
 def _root(ctx: typer.Context):
-    if ctx.invoked_subcommand is None:
+    if ctx.invoked_subcommand is None:  # pragma: no cover
         print(ctx.get_help())
         raise typer.Exit()
 
@@ -64,5 +64,5 @@ def count(
     print(f"[green]Finished. Results in {out_dir}")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     app()

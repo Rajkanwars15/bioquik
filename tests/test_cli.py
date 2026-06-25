@@ -33,6 +33,36 @@ def test_cli_minimal(tmp_path: Path):
     assert csv.exists()
 
 
+def test_cli_invalid_patterns(tmp_path: Path):
+    seq_dir = tmp_path / "seq"
+    seq_dir.mkdir()
+    res = runner.invoke(
+        bioquik.cli.app,
+        ["count", "--patterns", "AAAA", "--seq-dir", str(seq_dir)],
+    )
+    assert res.exit_code == 1
+
+
+def test_cli_no_subcommand():
+    res = runner.invoke(bioquik.cli.app, [])
+    assert res.exit_code == 0
+
+
+def test_cli_out_dir_already_exists(tmp_path: Path):
+    seq_dir = tmp_path / "seq"
+    seq_dir.mkdir()
+    write_fasta(seq_dir / "a.fasta", "ATCGCGAT")
+    out_dir = tmp_path / "out"
+    out_dir.mkdir()
+    (out_dir / "old.csv").write_text("stale")
+    res = runner.invoke(
+        bioquik.cli.app,
+        ["count", "--patterns", "*CG*", "--seq-dir", str(seq_dir), "--out-dir", str(out_dir)],
+    )
+    assert res.exit_code == 0
+    assert not (out_dir / "old.csv").exists()
+
+
 def test_cli_json_and_plot(tmp_path):
     seq_dir = tmp_path / "seq"
     seq_dir.mkdir()
