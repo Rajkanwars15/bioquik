@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
-
 from pydivsufsort import divsufsort
 
 from .wavelettree import WaveletTree
@@ -40,7 +38,7 @@ class FMIndex:
 
         # 3) C-table.
         self.alphabet = sorted(set(self.bwt))
-        totals: Dict[int, int] = {c: 0 for c in self.alphabet}
+        totals: dict[int, int] = {c: 0 for c in self.alphabet}
         for b in self.bwt:
             totals[b] += 1
         cumsum = 0
@@ -54,7 +52,7 @@ class FMIndex:
 
         # 5) SA sampling (for locate).
         self.sa_sample_rate = sa_sample_rate
-        self.sa_samples: Dict[int, int] = {
+        self.sa_samples: dict[int, int] = {
             i: sa_i for i, sa_i in enumerate(sa) if i % sa_sample_rate == 0
         }
         self._sa_len = len(sa)
@@ -76,7 +74,7 @@ class FMIndex:
         lo, hi = self._backward_search(pattern)
         return hi - lo
 
-    def locate(self, pattern: bytes) -> List[int]:
+    def locate(self, pattern: bytes) -> list[int]:
         """Return all start positions of *pattern* (0-based)."""
         lo, hi = self._backward_search(pattern)
         return [self._resolve_sa(idx) for idx in range(lo, hi)]

@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import List
-
 __all__ = ["WaveletTree"]
 
 
@@ -41,9 +39,9 @@ class WaveletTree:
         left_alpha, right_alpha = alphabet[:mid], alphabet[mid:]
 
         # Build bitvector and partition children sequences.
-        left_bytes: List[int] = []
-        right_bytes: List[int] = []
-        bits: List[int] = []
+        left_bytes: list[int] = []
+        right_bytes: list[int] = []
+        bits: list[int] = []
         cur, cnt = 0, 0
         for b in data:
             go_left = b in left_alpha
@@ -63,7 +61,8 @@ class WaveletTree:
         self.bitvec = bytes(bits)
 
         # Precompute rank1 samples.
-        self.prefix_ranks = [0]
+        # prefix_ranks[k] = count of 1-bits in [0, k*sample_rate).
+        self.prefix_ranks = []
         total = 0
         bit_index = 0
         for byte in self.bitvec:

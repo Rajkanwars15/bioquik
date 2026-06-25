@@ -8,15 +8,16 @@ Bioquik is designed for **batch analysis**. It processes directories of FASTA fi
 
 ## Installation
 
-```shell
-pip install bioquik
+```bash
+pip install bioquik           # core
+pip install bioquik[viz]      # + matplotlib for plots
 ```
 
 ---
 
 ## Quickstart
 
-See the Quickstart guide for command-line and Python examples.
+See the [Quickstart](quickstart.md) guide for command-line and Python API examples.
 
 ---
 
@@ -24,11 +25,12 @@ See the Quickstart guide for command-line and Python examples.
 
 ```{toctree}
 :maxdepth: 2
-:caption: Tutorials
+:caption: User Guide
 
 quickstart
 validation
 reports
+benchmarks
 ```
 
 ```{toctree}

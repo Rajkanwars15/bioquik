@@ -1,16 +1,16 @@
 from __future__ import annotations
+
 import os
 import shutil
 from pathlib import Path
-from typing import List
 
 import typer
 from rich import print
 
-from .validate import validate_patterns, validate_dir
+from .plotter import plot_distribution, plot_heatmap
 from .processor import run_count
 from .reports import combine_csv, write_summary
-from .plotter import plot_distribution, plot_heatmap
+from .validate import validate_dir, validate_patterns
 
 app = typer.Typer(
     help="bioquik — an attempt to make biotech faster and easier ;) ",
@@ -21,7 +21,7 @@ app = typer.Typer(
 
 @app.callback(invoke_without_command=True)
 def _root(ctx: typer.Context):
-    if ctx.invoked_subcommand is None:
+    if ctx.invoked_subcommand is None:  # pragma: no cover
         print(ctx.get_help())
         raise typer.Exit()
 
@@ -38,8 +38,12 @@ def count(
     plot: bool = typer.Option(False, help="Generate distribution & heatmap plots"),
 ) -> None:
     # 1) Validate inputs
-    pattern_list: List[str] = validate_patterns(patterns)
-    validate_dir(seq_dir, "sequence")
+    try:
+        pattern_list: list[str] = validate_patterns(patterns)
+        validate_dir(seq_dir, "sequence")
+    except ValueError as e:
+        print(f"[red]Error: {e}")
+        raise typer.Exit(code=1) from None
     # clear any previous results to avoid mixing old CSVs
     if out_dir.exists():
         shutil.rmtree(out_dir)
@@ -60,5 +64,5 @@ def count(
     print(f"[green]Finished. Results in {out_dir}")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     app()

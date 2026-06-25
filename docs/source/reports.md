@@ -12,7 +12,7 @@ For each FASTA file processed, Bioquik generates:
 <filename>_motif_counts.csv
 ```
 
-Each CSV contains motif counts for that file.
+Columns: `Pattern`, `Motif`, `Count`. Only motifs with non-zero counts are written.
 
 ---
 
@@ -24,7 +24,7 @@ from bioquik.reports import combine_csv
 df = combine_csv(out_dir)
 ```
 
-This reads all `*_motif_counts.csv` files in `out_dir` and concatenates them.
+Reads all `*_motif_counts.csv` files in `out_dir` and concatenates them into a single DataFrame.
 
 ---
 
@@ -33,54 +33,50 @@ This reads all `*_motif_counts.csv` files in `out_dir` and concatenates them.
 ```python
 from bioquik.reports import write_summary
 
-write_summary(df, out_dir, json_out=True)
+write_summary(df, out_dir, json_out=False)
 ```
 
-Outputs:
-- `combined_counts.csv` (always)
-- `summary.json` (optional)
+Always writes:
+- `combined_counts.csv` — full per-motif table
+
+With `json_out=True`, also writes:
+- `combined_counts.json` — motif → total count across all files
+
+```python
+write_summary(df, out_dir, json_out=True)
+# creates out_dir/combined_counts.csv
+# creates out_dir/combined_counts.json
+```
 
 ---
 
 ## Plots
 
-Bioquik includes optional visualization utilities for summarizing motif distributions.
+Optional visualisations require the `viz` extra:
 
-### Enabling Visualization
-
-Plotting functionality is not included in the minimal installation. To enable visual outputs, install Bioquik with the visualization extra:
-
-```
+```bash
 pip install bioquik[viz]
 ```
 
-This installs Matplotlib, which is required for rendering figures.
+### CLI
 
-### What Bioquik Generates
+```bash
+bioquik count --patterns "*CG*" --seq-dir data/ --plot
+```
 
-When plotting is enabled, the following images are created in the output directory:
+Generates:
+- `motif_distribution.png` — bar chart of total counts per motif
+- `motif_heatmap.png` — heatmap of counts by file
 
-- `motif_distribution.png`: Bar chart of total motif counts aggregated across input FASTA files.
-- `motif_heatmap.png`: Heatmap showing how motif counts vary by file.
-
-These are created automatically by the CLI when analysis completes.
-
-### Using Plotting Functions Programmatically
-
-If you're working interactively in Python, you can directly generate the same plots:
+### Python
 
 ```python
 from bioquik.plotter import plot_distribution, plot_heatmap
 from bioquik.reports import combine_csv
 
-# Combine outputs from prior motif scans
 df = combine_csv(out_dir)
-
-# Generate the plots
 plot_distribution(df, out_dir)
 plot_heatmap(df, out_dir)
 ```
 
-Both functions will save images directly to `out_dir`, allowing integration into custom pipelines.
-
-Visualization is entirely optional and does not affect core counting or summary reporting functionality.
+`plot_heatmap` accepts both long-form DataFrames (with `Motif`/`Count` columns, as produced by `combine_csv`) and wide-form DataFrames (rows = files, columns = motifs).
